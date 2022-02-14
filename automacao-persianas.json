@@ -1,0 +1,1917 @@
+[
+    {
+        "id": "9fbd0748982ca7e2",
+        "type": "group",
+        "z": "cb2ec52b0951b615",
+        "name": "Automações das Cortinas da Sala",
+        "style": {
+            "stroke": "#0070c0",
+            "fill": "#bfdbef",
+            "label": true
+        },
+        "nodes": [
+            "1c676d4b9dc53823",
+            "f1d59c7956f9b144",
+            "25207efb7d46de23",
+            "525630f6f81f1b72",
+            "4592b84482b4573e",
+            "82b6b345fa972356",
+            "42f9b677e47087c4",
+            "0976e20309f24524",
+            "0ab5c93a8117e5cd",
+            "e7308c81bf1ed676",
+            "ec4785f786b121f0",
+            "75afe8d3a5b9e341",
+            "b5f49debbf863d09",
+            "c605befb5508dc55",
+            "fe45530cfd56876f",
+            "9582a47ddbc65b57",
+            "af18953a9bd2ba8e",
+            "d85b25b48160353e",
+            "d9b6f7ec44f435e2",
+            "336d3766faaf0d55",
+            "1af24cf7f7238a99",
+            "92e2409c38fcb8a2",
+            "dc7efe1ff3cb0d0f",
+            "649916653576d654",
+            "108469089b1ea3a3",
+            "fe0fdd26bb3855e2",
+            "77e3c819b60e7640",
+            "192b81a1d1f8a8e9",
+            "7d37277724301f5e",
+            "ee9147963dade104",
+            "a16f69ab19514622",
+            "356d54e4f58b7f4b",
+            "70fa8c0397d87ba8",
+            "8f29addfa9626a37",
+            "3f7b21390be2d034",
+            "09ceeeb65c36ff42",
+            "065a1f04757e56ea",
+            "a8faf79ff3c3bb85",
+            "86434966a24b330f",
+            "6e92fdc70b7c5d88",
+            "01fb139747bd5eb5",
+            "f129b42a754bcd2c",
+            "4564223b72fd9f10",
+            "5d2eec8ee06c6190",
+            "9685748f3e738acd",
+            "80a8d0059c197634",
+            "7a3f30643a41e3ab",
+            "c7027c9439f7a103",
+            "fa0d81b1dabd84a4",
+            "f8dd9ce39394ae94",
+            "a3c1106db6281515",
+            "1df8ab114edfceaf",
+            "ac2411382454d818",
+            "a217a8221716eb84",
+            "41921126d885bc6b",
+            "77a7bf187a26a36d",
+            "f85b61fc311ae371",
+            "7be71a110f3786d3",
+            "c1c9d0cbd12e8798",
+            "794bf9b02dd8546d",
+            "f5dce18e3845001b"
+        ],
+        "x": 54,
+        "y": 1519,
+        "w": 2512,
+        "h": 1002
+    },
+    {
+        "id": "1c676d4b9dc53823",
+        "type": "time-range-switch",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Hora entre 22h e 10h",
+        "lat": "-23.5489",
+        "lon": "-46.6388",
+        "startTime": "22:00",
+        "endTime": "solarNoon",
+        "startOffset": 0,
+        "endOffset": "-120",
+        "x": 1460,
+        "y": 1880,
+        "wires": [
+            [
+                "82b6b345fa972356"
+            ],
+            [
+                "25207efb7d46de23"
+            ]
+        ]
+    },
+    {
+        "id": "f1d59c7956f9b144",
+        "type": "api-current-state",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Céu sem nuvens",
+        "server": "3b565a9e.76ccf6",
+        "version": 3,
+        "outputs": 2,
+        "halt_if": "80",
+        "halt_if_type": "num",
+        "halt_if_compare": "lte",
+        "entity_id": "sensor.casa_cloud_cover",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 2050,
+        "y": 1960,
+        "wires": [
+            [
+                "4592b84482b4573e"
+            ],
+            [
+                "0976e20309f24524"
+            ]
+        ]
+    },
+    {
+        "id": "25207efb7d46de23",
+        "type": "api-call-service",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Abrir cortinas leste",
+        "server": "3b565a9e.76ccf6",
+        "version": 3,
+        "debugenabled": false,
+        "service": "open_cover",
+        "data": "",
+        "dataType": "jsonata",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "entityId": "cover.cortinas_leste",
+        "service_domain": "cover",
+        "mergecontext": "",
+        "x": 1690,
+        "y": 1980,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "525630f6f81f1b72",
+        "type": "api-call-service",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Fechar cortinas leste",
+        "server": "3b565a9e.76ccf6",
+        "version": 3,
+        "debugenabled": false,
+        "service": "close_cover",
+        "data": "",
+        "dataType": "jsonata",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "entityId": "cover.cortinas_leste",
+        "service_domain": "cover",
+        "mergecontext": "",
+        "x": 1420,
+        "y": 2300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4592b84482b4573e",
+        "type": "api-call-service",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Fechar cortinas leste",
+        "server": "3b565a9e.76ccf6",
+        "version": 3,
+        "debugenabled": false,
+        "service": "close_cover",
+        "data": "",
+        "dataType": "jsonata",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "entityId": "cover.cortinas_leste",
+        "service_domain": "cover",
+        "mergecontext": "",
+        "x": 2300,
+        "y": 1960,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "82b6b345fa972356",
+        "type": "time-range-switch",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Hora entre Amanhecer e 10h",
+        "lat": "-23.5489",
+        "lon": "-46.6388",
+        "startTime": "sunriseEnd",
+        "endTime": "solarNoon",
+        "startOffset": 0,
+        "endOffset": "-120",
+        "x": 1760,
+        "y": 1920,
+        "wires": [
+            [
+                "f1d59c7956f9b144"
+            ],
+            [
+                "c605befb5508dc55"
+            ]
+        ]
+    },
+    {
+        "id": "42f9b677e47087c4",
+        "type": "api-call-service",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Abrir cortinas leste",
+        "server": "3b565a9e.76ccf6",
+        "version": 3,
+        "debugenabled": false,
+        "service": "open_cover",
+        "data": "",
+        "dataType": "jsonata",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "entityId": "cover.cortinas_leste",
+        "service_domain": "cover",
+        "mergecontext": "",
+        "x": 2290,
+        "y": 2080,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0976e20309f24524",
+        "type": "api-call-service",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Abrir cortinas leste",
+        "server": "3b565a9e.76ccf6",
+        "version": 3,
+        "debugenabled": false,
+        "service": "open_cover",
+        "data": "",
+        "dataType": "jsonata",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "entityId": "cover.cortinas_leste",
+        "service_domain": "cover",
+        "mergecontext": "",
+        "x": 2290,
+        "y": 2000,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0ab5c93a8117e5cd",
+        "type": "comment",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Se ninguém em casa, fecha cortinas",
+        "info": "",
+        "x": 1120,
+        "y": 1980,
+        "wires": []
+    },
+    {
+        "id": "e7308c81bf1ed676",
+        "type": "comment",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Sempre entre 10h e 22h, deixar cortinas abertas",
+        "info": "",
+        "x": 1540,
+        "y": 1840,
+        "wires": []
+    },
+    {
+        "id": "ec4785f786b121f0",
+        "type": "comment",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Se luz da sala estiver ligada (recebendo visitas), deixar cortina aberta. Senão, fechar",
+        "info": "",
+        "x": 2250,
+        "y": 2040,
+        "wires": []
+    },
+    {
+        "id": "75afe8d3a5b9e341",
+        "type": "comment",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Se for de manhã, verificar sol. Se for de noite, verificar visita",
+        "info": "",
+        "x": 1860,
+        "y": 1880,
+        "wires": []
+    },
+    {
+        "id": "b5f49debbf863d09",
+        "type": "api-call-service",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Fechar cortinas leste",
+        "server": "3b565a9e.76ccf6",
+        "version": 3,
+        "debugenabled": false,
+        "service": "close_cover",
+        "data": "",
+        "dataType": "jsonata",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "entityId": "cover.cortinas_leste",
+        "service_domain": "cover",
+        "mergecontext": "",
+        "x": 2300,
+        "y": 2120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c605befb5508dc55",
+        "type": "api-current-state",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Trilho Sala ligado",
+        "server": "3b565a9e.76ccf6",
+        "version": 3,
+        "outputs": 2,
+        "halt_if": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "light.trilho_sala",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 2050,
+        "y": 2080,
+        "wires": [
+            [
+                "42f9b677e47087c4"
+            ],
+            [
+                "b5f49debbf863d09"
+            ]
+        ]
+    },
+    {
+        "id": "fe45530cfd56876f",
+        "type": "comment",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Se céu sem nuvens, fechar cortina. Senão, deixar aberto",
+        "info": "",
+        "x": 2170,
+        "y": 1920,
+        "wires": []
+    },
+    {
+        "id": "9582a47ddbc65b57",
+        "type": "time-range-switch",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Dia ou Noite",
+        "lat": "-23.5489",
+        "lon": "-46.6388",
+        "startTime": "sunriseEnd",
+        "endTime": "sunsetStart",
+        "startOffset": 0,
+        "endOffset": "-60",
+        "x": 1430,
+        "y": 2200,
+        "wires": [
+            [
+                "7d37277724301f5e"
+            ],
+            [
+                "a16f69ab19514622"
+            ]
+        ]
+    },
+    {
+        "id": "af18953a9bd2ba8e",
+        "type": "api-current-state",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Céu sem nuvens",
+        "server": "3b565a9e.76ccf6",
+        "version": 3,
+        "outputs": 2,
+        "halt_if": "80",
+        "halt_if_type": "num",
+        "halt_if_compare": "lte",
+        "entity_id": "sensor.casa_cloud_cover",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 2110,
+        "y": 2220,
+        "wires": [
+            [
+                "108469089b1ea3a3"
+            ],
+            [
+                "fe0fdd26bb3855e2"
+            ]
+        ]
+    },
+    {
+        "id": "d85b25b48160353e",
+        "type": "api-current-state",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Alguém em casa",
+        "server": "3b565a9e.76ccf6",
+        "version": 3,
+        "outputs": 2,
+        "halt_if": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_boolean.casa_ocupada",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [],
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 1130,
+        "y": 2200,
+        "wires": [
+            [
+                "9582a47ddbc65b57",
+                "1c676d4b9dc53823"
+            ],
+            [
+                "649916653576d654",
+                "525630f6f81f1b72"
+            ]
+        ]
+    },
+    {
+        "id": "d9b6f7ec44f435e2",
+        "type": "comment",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Fluxos para dia e noite",
+        "info": "",
+        "x": 1460,
+        "y": 2160,
+        "wires": []
+    },
+    {
+        "id": "336d3766faaf0d55",
+        "type": "comment",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "De noite, se luz da sala estiver ligada (recebendo visitas), deixar cortina aberta. Senão, fechar",
+        "info": "",
+        "x": 2180,
+        "y": 2380,
+        "wires": []
+    },
+    {
+        "id": "1af24cf7f7238a99",
+        "type": "comment",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Se horário do sol, verificar nuvens. Senão, deixar aberto",
+        "info": "",
+        "x": 1800,
+        "y": 2160,
+        "wires": []
+    },
+    {
+        "id": "92e2409c38fcb8a2",
+        "type": "api-current-state",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Trilho Sala ligado",
+        "server": "3b565a9e.76ccf6",
+        "version": 3,
+        "outputs": 2,
+        "halt_if": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "light.trilho_sala",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 1950,
+        "y": 2420,
+        "wires": [
+            [
+                "77e3c819b60e7640"
+            ],
+            [
+                "192b81a1d1f8a8e9"
+            ]
+        ]
+    },
+    {
+        "id": "dc7efe1ff3cb0d0f",
+        "type": "comment",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Se céu sem nuvens, fechar cortina. Senão, deixar aberto",
+        "info": "",
+        "x": 2230,
+        "y": 2180,
+        "wires": []
+    },
+    {
+        "id": "649916653576d654",
+        "type": "api-call-service",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Fechar cortinas norte",
+        "server": "3b565a9e.76ccf6",
+        "version": 3,
+        "debugenabled": false,
+        "service": "close_cover",
+        "data": "",
+        "dataType": "jsonata",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "entityId": "cover.cortinas_norte",
+        "service_domain": "cover",
+        "mergecontext": "",
+        "x": 1420,
+        "y": 2360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "108469089b1ea3a3",
+        "type": "api-call-service",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Fechar cortinas norte",
+        "server": "3b565a9e.76ccf6",
+        "version": 3,
+        "debugenabled": false,
+        "service": "close_cover",
+        "data": "",
+        "dataType": "jsonata",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "entityId": "cover.cortinas_norte",
+        "service_domain": "cover",
+        "mergecontext": "",
+        "x": 2360,
+        "y": 2220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fe0fdd26bb3855e2",
+        "type": "api-call-service",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Abrir cortinas norte",
+        "server": "3b565a9e.76ccf6",
+        "version": 3,
+        "debugenabled": false,
+        "service": "open_cover",
+        "data": "",
+        "dataType": "jsonata",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "entityId": "cover.cortinas_norte",
+        "service_domain": "cover",
+        "mergecontext": "",
+        "x": 2350,
+        "y": 2260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "77e3c819b60e7640",
+        "type": "api-call-service",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Abrir cortinas norte",
+        "server": "3b565a9e.76ccf6",
+        "version": 3,
+        "debugenabled": false,
+        "service": "open_cover",
+        "data": "",
+        "dataType": "jsonata",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "entityId": "cover.cortinas_norte",
+        "service_domain": "cover",
+        "mergecontext": "",
+        "x": 2190,
+        "y": 2440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "192b81a1d1f8a8e9",
+        "type": "api-call-service",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Fechar cortinas norte",
+        "server": "3b565a9e.76ccf6",
+        "version": 3,
+        "debugenabled": false,
+        "service": "close_cover",
+        "data": "",
+        "dataType": "jsonata",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "entityId": "cover.cortinas_norte",
+        "service_domain": "cover",
+        "mergecontext": "",
+        "x": 2200,
+        "y": 2480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7d37277724301f5e",
+        "type": "time-range-switch",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Hora entre 14h e Por do Sol",
+        "lat": "-23.5489",
+        "lon": "-46.6388",
+        "startTime": "solarNoon",
+        "endTime": "sunsetStart",
+        "startOffset": "120",
+        "endOffset": "-60",
+        "x": 1720,
+        "y": 2200,
+        "wires": [
+            [
+                "af18953a9bd2ba8e"
+            ],
+            [
+                "356d54e4f58b7f4b"
+            ]
+        ]
+    },
+    {
+        "id": "ee9147963dade104",
+        "type": "comment",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": " Se for começo da noite, deixar sempre aberto",
+        "info": "",
+        "x": 1770,
+        "y": 2280,
+        "wires": []
+    },
+    {
+        "id": "a16f69ab19514622",
+        "type": "time-range-switch",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Entre Por do Sol e 22h",
+        "lat": "-23.5489",
+        "lon": "-46.6388",
+        "startTime": "sunsetStart",
+        "endTime": "22:00",
+        "startOffset": "-60",
+        "endOffset": "0",
+        "x": 1700,
+        "y": 2320,
+        "wires": [
+            [
+                "70fa8c0397d87ba8"
+            ],
+            [
+                "92e2409c38fcb8a2"
+            ]
+        ]
+    },
+    {
+        "id": "356d54e4f58b7f4b",
+        "type": "api-call-service",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Abrir cortinas norte",
+        "server": "3b565a9e.76ccf6",
+        "version": 3,
+        "debugenabled": false,
+        "service": "open_cover",
+        "data": "",
+        "dataType": "jsonata",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "entityId": "cover.cortinas_norte",
+        "service_domain": "cover",
+        "mergecontext": "",
+        "x": 2110,
+        "y": 2280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "70fa8c0397d87ba8",
+        "type": "api-call-service",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Abrir cortinas norte",
+        "server": "3b565a9e.76ccf6",
+        "version": 3,
+        "debugenabled": false,
+        "service": "open_cover",
+        "data": "",
+        "dataType": "jsonata",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "entityId": "cover.cortinas_norte",
+        "service_domain": "cover",
+        "mergecontext": "",
+        "x": 1950,
+        "y": 2340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8f29addfa9626a37",
+        "type": "server-state-changed",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Mudou luz do trilho da sala",
+        "server": "3b565a9e.76ccf6",
+        "version": 3,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "light.trilho_sala",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 1,
+        "output_only_on_state_change": true,
+        "for": "5",
+        "forType": "num",
+        "forUnits": "minutes",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 190,
+        "y": 1980,
+        "wires": [
+            [
+                "09ceeeb65c36ff42"
+            ]
+        ]
+    },
+    {
+        "id": "3f7b21390be2d034",
+        "type": "comment",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Trigger check de cortinas se:",
+        "info": "",
+        "x": 200,
+        "y": 1820,
+        "wires": []
+    },
+    {
+        "id": "09ceeeb65c36ff42",
+        "type": "time-range-switch",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Dia ou Noite",
+        "lat": "-23.5489",
+        "lon": "-46.6388",
+        "startTime": "sunriseEnd",
+        "endTime": "sunsetStart",
+        "startOffset": 0,
+        "endOffset": "-60",
+        "x": 410,
+        "y": 1980,
+        "wires": [
+            [],
+            [
+                "4564223b72fd9f10"
+            ]
+        ]
+    },
+    {
+        "id": "065a1f04757e56ea",
+        "type": "comment",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Mudou luz do trilho da sala de noite",
+        "info": "",
+        "x": 220,
+        "y": 1920,
+        "wires": []
+    },
+    {
+        "id": "a8faf79ff3c3bb85",
+        "type": "comment",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Horários críticos do dia",
+        "info": "",
+        "x": 180,
+        "y": 2040,
+        "wires": []
+    },
+    {
+        "id": "86434966a24b330f",
+        "type": "comment",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Cobertura do céu mudou durante o dia",
+        "info": "",
+        "x": 230,
+        "y": 2360,
+        "wires": []
+    },
+    {
+        "id": "6e92fdc70b7c5d88",
+        "type": "server-state-changed",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Mudou cobertura do céu",
+        "server": "3b565a9e.76ccf6",
+        "version": 3,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "sensor.casa_cloud_cover",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "80",
+        "halt_if_type": "num",
+        "halt_if_compare": "gte",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 190,
+        "y": 2400,
+        "wires": [
+            [
+                "9685748f3e738acd"
+            ],
+            [
+                "9685748f3e738acd"
+            ]
+        ]
+    },
+    {
+        "id": "01fb139747bd5eb5",
+        "type": "comment",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Mudou presença em casa",
+        "info": "",
+        "x": 190,
+        "y": 2260,
+        "wires": []
+    },
+    {
+        "id": "f129b42a754bcd2c",
+        "type": "server-state-changed",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Casa Ocupada",
+        "server": "3b565a9e.76ccf6",
+        "version": 3,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "input_boolean.casa_ocupada",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": "5",
+        "forType": "num",
+        "forUnits": "minutes",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 160,
+        "y": 2300,
+        "wires": [
+            [
+                "4564223b72fd9f10"
+            ],
+            [
+                "4564223b72fd9f10"
+            ]
+        ]
+    },
+    {
+        "id": "4564223b72fd9f10",
+        "type": "switch",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Agrupador",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 650,
+        "y": 2060,
+        "wires": [
+            [
+                "c7027c9439f7a103"
+            ]
+        ]
+    },
+    {
+        "id": "5d2eec8ee06c6190",
+        "type": "inject",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Trigger Manual",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "on",
+        "payloadType": "str",
+        "x": 420,
+        "y": 1860,
+        "wires": [
+            [
+                "4564223b72fd9f10"
+            ]
+        ]
+    },
+    {
+        "id": "9685748f3e738acd",
+        "type": "time-range-switch",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Dia ou Noite",
+        "lat": "",
+        "lon": "-46.6388",
+        "startTime": "sunriseEnd",
+        "endTime": "sunsetStart",
+        "startOffset": 0,
+        "endOffset": "-60",
+        "x": 430,
+        "y": 2400,
+        "wires": [
+            [
+                "4564223b72fd9f10"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "80a8d0059c197634",
+        "type": "bigtimer",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "outtopic": "",
+        "outpayload1": "",
+        "outpayload2": "",
+        "name": "Nascer as 10h / 14h ao Por",
+        "comment": "",
+        "lat": "-23.5489",
+        "lon": "-46.6388",
+        "starttime": "5003",
+        "endtime": "5002",
+        "starttime2": "5002",
+        "endtime2": "5004",
+        "startoff": "0",
+        "endoff": "-120",
+        "startoff2": "120",
+        "endoff2": "-60",
+        "offs": 0,
+        "outtext1": "on",
+        "outtext2": "off",
+        "timeout": 1440,
+        "sun": true,
+        "mon": true,
+        "tue": true,
+        "wed": true,
+        "thu": true,
+        "fri": true,
+        "sat": true,
+        "jan": true,
+        "feb": true,
+        "mar": true,
+        "apr": true,
+        "may": true,
+        "jun": true,
+        "jul": true,
+        "aug": true,
+        "sep": true,
+        "oct": true,
+        "nov": true,
+        "dec": true,
+        "day1": 0,
+        "month1": 0,
+        "day2": 0,
+        "month2": 0,
+        "day3": 0,
+        "month3": 0,
+        "day4": 0,
+        "month4": 0,
+        "day5": 0,
+        "month5": 0,
+        "day6": 0,
+        "month6": 0,
+        "day7": 0,
+        "month7": 0,
+        "day8": 0,
+        "month8": 0,
+        "day9": 0,
+        "month9": 0,
+        "day10": 0,
+        "month10": 0,
+        "day11": 0,
+        "month11": 0,
+        "day12": 0,
+        "month12": 0,
+        "d1": 0,
+        "w1": 0,
+        "d2": 0,
+        "w2": 0,
+        "d3": 0,
+        "w3": 0,
+        "d4": 0,
+        "w4": 0,
+        "d5": 0,
+        "w5": 0,
+        "d6": 0,
+        "w6": 0,
+        "xday1": 0,
+        "xmonth1": 0,
+        "xday2": 0,
+        "xmonth2": 0,
+        "xday3": 0,
+        "xmonth3": 0,
+        "xday4": 0,
+        "xmonth4": 0,
+        "xday5": 0,
+        "xmonth5": 0,
+        "xday6": 0,
+        "xmonth6": 0,
+        "xday7": 0,
+        "xmonth7": 0,
+        "xday8": 0,
+        "xmonth8": 0,
+        "xday9": 0,
+        "xmonth9": 0,
+        "xday10": 0,
+        "xmonth10": 0,
+        "xday11": 0,
+        "xmonth11": 0,
+        "xday12": 0,
+        "xmonth12": 0,
+        "xd1": 0,
+        "xw1": 0,
+        "xd2": 0,
+        "xw2": 0,
+        "xd3": 0,
+        "xw3": 0,
+        "xd4": 0,
+        "xw4": 0,
+        "xd5": 0,
+        "xw5": 0,
+        "xd6": 0,
+        "xw6": 0,
+        "suspend": false,
+        "random": false,
+        "randon1": false,
+        "randoff1": false,
+        "randon2": false,
+        "randoff2": false,
+        "repeat": true,
+        "atstart": true,
+        "odd": false,
+        "even": false,
+        "x": 200,
+        "y": 2100,
+        "wires": [
+            [],
+            [],
+            [
+                "4564223b72fd9f10"
+            ]
+        ]
+    },
+    {
+        "id": "7a3f30643a41e3ab",
+        "type": "inject",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "22h00",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 22 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 220,
+        "y": 2160,
+        "wires": [
+            [
+                "4564223b72fd9f10"
+            ]
+        ]
+    },
+    {
+        "id": "c7027c9439f7a103",
+        "type": "api-current-state",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Automação da Cortina Ligada?",
+        "server": "3b565a9e.76ccf6",
+        "version": 3,
+        "outputs": 2,
+        "halt_if": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_boolean.automacao_cortinas",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [],
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 870,
+        "y": 2060,
+        "wires": [
+            [
+                "f5dce18e3845001b"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "fa0d81b1dabd84a4",
+        "type": "comment",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Somente muda cortinas se automação ligada e vidros fechados",
+        "info": "",
+        "x": 950,
+        "y": 1940,
+        "wires": []
+    },
+    {
+        "id": "f8dd9ce39394ae94",
+        "type": "comment",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "CORTINAS LESTE",
+        "info": "",
+        "x": 1450,
+        "y": 1800,
+        "wires": []
+    },
+    {
+        "id": "a3c1106db6281515",
+        "type": "comment",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "CORTINAS NORTE",
+        "info": "",
+        "x": 1450,
+        "y": 2120,
+        "wires": []
+    },
+    {
+        "id": "1df8ab114edfceaf",
+        "type": "server-state-changed",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "",
+        "server": "3b565a9e.76ccf6",
+        "version": 4,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "binary_sensor.sensor_vidros_varanda_1_contact",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "off",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 310,
+        "y": 1680,
+        "wires": [
+            [
+                "41921126d885bc6b"
+            ],
+            [
+                "794bf9b02dd8546d"
+            ]
+        ]
+    },
+    {
+        "id": "ac2411382454d818",
+        "type": "server-state-changed",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "",
+        "server": "3b565a9e.76ccf6",
+        "version": 4,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "binary_sensor.sensor_vidros_varanda_2_contact",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "off",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 310,
+        "y": 1720,
+        "wires": [
+            [
+                "41921126d885bc6b"
+            ],
+            [
+                "794bf9b02dd8546d"
+            ]
+        ]
+    },
+    {
+        "id": "a217a8221716eb84",
+        "type": "server-state-changed",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "",
+        "server": "3b565a9e.76ccf6",
+        "version": 4,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "binary_sensor.sensor_vidros_varanda_3_contact",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "str",
+        "haltifstate": "off",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 2,
+        "output_only_on_state_change": true,
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 310,
+        "y": 1760,
+        "wires": [
+            [
+                "41921126d885bc6b"
+            ],
+            [
+                "794bf9b02dd8546d"
+            ]
+        ]
+    },
+    {
+        "id": "41921126d885bc6b",
+        "type": "api-current-state",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Vidro 1 Fechado",
+        "server": "3b565a9e.76ccf6",
+        "version": 3,
+        "outputs": 2,
+        "halt_if": "off",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "binary_sensor.sensor_vidros_varanda_1_contact",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 740,
+        "y": 1620,
+        "wires": [
+            [
+                "77a7bf187a26a36d"
+            ],
+            [
+                "7be71a110f3786d3"
+            ]
+        ]
+    },
+    {
+        "id": "77a7bf187a26a36d",
+        "type": "api-current-state",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Vidro 2 Fechado",
+        "server": "3b565a9e.76ccf6",
+        "version": 3,
+        "outputs": 2,
+        "halt_if": "off",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "binary_sensor.sensor_vidros_varanda_2_contact",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 980,
+        "y": 1600,
+        "wires": [
+            [
+                "f85b61fc311ae371"
+            ],
+            [
+                "7be71a110f3786d3"
+            ]
+        ]
+    },
+    {
+        "id": "f85b61fc311ae371",
+        "type": "api-current-state",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Vidro 3 Fechado",
+        "server": "3b565a9e.76ccf6",
+        "version": 3,
+        "outputs": 2,
+        "halt_if": "off",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "binary_sensor.sensor_vidros_varanda_3_contact",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 1200,
+        "y": 1580,
+        "wires": [
+            [
+                "c1c9d0cbd12e8798"
+            ],
+            [
+                "7be71a110f3786d3"
+            ]
+        ]
+    },
+    {
+        "id": "7be71a110f3786d3",
+        "type": "api-call-service",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Vidros Varanda Abertos",
+        "server": "3b565a9e.76ccf6",
+        "version": 4,
+        "debugenabled": false,
+        "domain": "input_boolean",
+        "service": "turn_off",
+        "target": {
+            "areaId": [],
+            "deviceId": [],
+            "entityId": [
+                "input_boolean.vidros_varanda_fechados"
+            ]
+        },
+        "data": "",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 1450,
+        "y": 1680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c1c9d0cbd12e8798",
+        "type": "api-call-service",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Vidros Varanda Fechados",
+        "server": "3b565a9e.76ccf6",
+        "version": 4,
+        "debugenabled": false,
+        "domain": "input_boolean",
+        "service": "turn_on",
+        "target": {
+            "areaId": [],
+            "deviceId": [],
+            "entityId": [
+                "input_boolean.vidros_varanda_fechados"
+            ]
+        },
+        "data": "",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 1450,
+        "y": 1560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "794bf9b02dd8546d",
+        "type": "api-call-service",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Vidros Varanda Abertos",
+        "server": "3b565a9e.76ccf6",
+        "version": 4,
+        "debugenabled": false,
+        "domain": "input_boolean",
+        "service": "turn_off",
+        "target": {
+            "areaId": [],
+            "deviceId": [],
+            "entityId": [
+                "input_boolean.vidros_varanda_fechados"
+            ]
+        },
+        "data": "",
+        "dataType": "jsonata",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 790,
+        "y": 1720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f5dce18e3845001b",
+        "type": "api-current-state",
+        "z": "cb2ec52b0951b615",
+        "g": "9fbd0748982ca7e2",
+        "name": "Vidros Fechados",
+        "server": "3b565a9e.76ccf6",
+        "version": 3,
+        "outputs": 2,
+        "halt_if": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_boolean.vidros_varanda_fechados",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "for": 0,
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 1070,
+        "y": 2120,
+        "wires": [
+            [
+                "d85b25b48160353e"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "3b565a9e.76ccf6",
+        "type": "server",
+        "name": "Home Assistant",
+        "version": 1,
+        "addon": true,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "y|yes|true|on|home|open",
+        "connectionDelay": true,
+        "cacheJson": true
+    }
+]
