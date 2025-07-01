@@ -1,0 +1,627 @@
+[
+    {
+        "id": "92a2f9f39f7d4b03",
+        "type": "api-call-service",
+        "z": "66149d75df766f35",
+        "name": "Notificar Alexa Quarto",
+        "server": "3b565a9e.76ccf6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "notify.alexa_media",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [],
+        "labelId": [],
+        "data": "{\"message\":\"{{notification.message}}\",\"data\":{\"type\":\"tts\"},\"target\":[\"media_player.echo_NOME_DO_DEVICE\"]}",
+        "dataType": "json",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "notify",
+        "service": "alexa_media",
+        "x": 2880,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c4d94baa1f30e1c3",
+        "type": "api-current-state",
+        "z": "66149d75df766f35",
+        "name": "Notificação de Aviões?",
+        "server": "3b565a9e.76ccf6",
+        "version": 3,
+        "outputs": 2,
+        "halt_if": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_boolean.notificacao_de_avioes",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 2600,
+        "y": 200,
+        "wires": [
+            [
+                "92a2f9f39f7d4b03"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "70572f39840328d1",
+        "type": "function",
+        "z": "66149d75df766f35",
+        "name": "Formatar mensagem aviacao",
+        "func": "const ac = msg.originalAircraft || msg.payload;\nconst flight = ac.flight ? ac.flight.trim() : \"desconhecido\";\nconst reg = ac.r || \"sem registro\";\nconst desc = ac.desc || ac.t || \"aeronave\";\n\nconst origin = msg.route?.origin;\nconst destination = msg.route?.destination;\n\n// Função para converter string para alfabeto fonético da aviação\nfunction toPhonetic(str) {\n    const phoneticMap = {\n        A: 'Alpha', B: 'Bravo', C: 'Charlie', D: 'Delta',\n        E: 'Echo', F: 'Foxtrot', G: 'Golf', H: 'Hotel',\n        I: 'India', J: 'Juliett', K: 'Kilo', L: 'Lima',\n        M: 'Mike', N: 'November', O: 'Oscar', P: 'Papa',\n        Q: 'Quebec', R: 'Romeo', S: 'Sierra', T: 'Tango',\n        U: 'Uniform', V: 'Victor', W: 'Whiskey', X: 'X-ray',\n        Y: 'Yankee', Z: 'Zulu',\n        '0': 'Zero', '1': 'One', '2': 'Two', '3': 'Three',\n        '4': 'Four', '5': 'Five', '6': 'Six', '7': 'Seven',\n        '8': 'Eight', '9': 'Nine'\n    };\n\n    return str.toUpperCase().split('').map(c => phoneticMap[c] || c).join(' ');\n}\n\nconst flightPhonetic = toPhonetic(flight);\nconst regPhonetic = toPhonetic(reg);\n\nlet trechoRota = \"\";\nif (origin && destination && origin !== \"origem desconhecida\" && destination !== \"destino desconhecida\") {\n    trechoRota = `, de ${origin} para ${destination}`;\n}\n\nmsg.notification = {\n    title: `Voo ${flight}`,\n    message: `Voo ${flightPhonetic}, registro ${regPhonetic}, um ${desc}${trechoRota}.`\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2320,
+        "y": 200,
+        "wires": [
+            [
+                "bcaa5f0ad0b093cd",
+                "c4d94baa1f30e1c3"
+            ]
+        ]
+    },
+    {
+        "id": "9b19da7b0229831c",
+        "type": "function",
+        "z": "66149d75df766f35",
+        "name": "Formatar dados do voo",
+        "func": "const route = msg.payload?.response?.flightroute;\nif (!route) return msg;\n\nmsg.route = {\n    origin: route.origin?.municipality || route.origin?.name || \"origem desconhecida\",\n    destination: route.destination?.municipality || route.destination?.name || \"destino desconhecido\"\n};\n\n// Passa os dados anteriores do avião junto\nmsg.payload = msg.originalAircraft;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1990,
+        "y": 200,
+        "wires": [
+            [
+                "70572f39840328d1",
+                "f21ffbdba049df87",
+                "0e3f1476a55eedc8",
+                "41354cd436a81761"
+            ]
+        ]
+    },
+    {
+        "id": "bcaa5f0ad0b093cd",
+        "type": "debug",
+        "z": "66149d75df766f35",
+        "name": "debug 18",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2600,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "594352420539603a",
+        "type": "http request",
+        "z": "66149d75df766f35",
+        "name": "Get Flight Data",
+        "method": "use",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1760,
+        "y": 200,
+        "wires": [
+            [
+                "9b19da7b0229831c",
+                "f93d2e222fee89b3"
+            ]
+        ]
+    },
+    {
+        "id": "f21ffbdba049df87",
+        "type": "debug",
+        "z": "66149d75df766f35",
+        "name": "debug 17",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2240,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "0e3f1476a55eedc8",
+        "type": "function",
+        "z": "66149d75df766f35",
+        "name": "Formatar mensagem v1",
+        "func": "const ac = msg.originalAircraft || msg.payload;\nconst flight = ac.flight ? ac.flight.trim() : \"desconhecido\";\nconst reg = ac.r || \"sem registro\";\nconst desc = ac.desc || ac.t || \"aeronave\";\n\nconst origin = msg.route?.origin;\nconst destination = msg.route?.destination;\n\nlet trechoRota = \"\";\nif (origin && destination && origin !== \"origem desconhecida\" && destination !== \"destino desconhecido\") {\n    trechoRota = `, de ${origin} para ${destination}`;\n}\n\nmsg.notification = {\n    title: `Voo ${flight}`,\n    message: `Voo ${flight}, registro ${reg}, um ${desc}${trechoRota}.`\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2310,
+        "y": 320,
+        "wires": [
+            [
+                "2daf76187f49b7e3",
+                "2bc501789115d5d5"
+            ]
+        ]
+    },
+    {
+        "id": "41354cd436a81761",
+        "type": "ha-sensor",
+        "z": "66149d75df766f35",
+        "name": "Último Voo",
+        "entityConfig": "cf8ca1928186b2fe",
+        "version": 0,
+        "state": "payload.r",
+        "stateType": "msg",
+        "attributes": [
+            {
+                "property": "flight",
+                "value": "payload.flight",
+                "valueType": "msg"
+            },
+            {
+                "property": "registration",
+                "value": "payload.r",
+                "valueType": "msg"
+            },
+            {
+                "property": "desc",
+                "value": "payload.desc",
+                "valueType": "msg"
+            },
+            {
+                "property": "origin",
+                "value": "route.origin",
+                "valueType": "msg"
+            },
+            {
+                "property": "destination",
+                "value": "route.destination",
+                "valueType": "msg"
+            }
+        ],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 2290,
+        "y": 560,
+        "wires": [
+            [
+                "a69485efc669f025"
+            ]
+        ]
+    },
+    {
+        "id": "ef61e541e8f9a933",
+        "type": "function",
+        "z": "66149d75df766f35",
+        "name": "Preparar corpo para pegar os dados do voo",
+        "func": "const flight = msg.payload.flight;\nif (!flight || typeof flight !== 'string') return null;\n\nmsg.originalAircraft = msg.payload;\nmsg.url = `https://api.adsbdb.com/v0/callsign/${flight.trim()}`;\nmsg.method = 'GET';\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1450,
+        "y": 200,
+        "wires": [
+            [
+                "594352420539603a",
+                "5df6ef69a2dae91a"
+            ]
+        ]
+    },
+    {
+        "id": "f93d2e222fee89b3",
+        "type": "debug",
+        "z": "66149d75df766f35",
+        "name": "debug 16",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2000,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "2daf76187f49b7e3",
+        "type": "api-current-state",
+        "z": "66149d75df766f35",
+        "name": "Notificação de Aviões?",
+        "server": "3b565a9e.76ccf6",
+        "version": 3,
+        "outputs": 2,
+        "halt_if": "on",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_boolean.notificacao_de_avioes",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 2600,
+        "y": 320,
+        "wires": [
+            [
+                "69f3060db7c9de05"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "2bc501789115d5d5",
+        "type": "debug",
+        "z": "66149d75df766f35",
+        "name": "debug 21",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2580,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "a69485efc669f025",
+        "type": "debug",
+        "z": "66149d75df766f35",
+        "name": "debug 22",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2660,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "f0a24d23610ed3f5",
+        "type": "rbe",
+        "z": "66149d75df766f35",
+        "name": "Continuar apenas se avião novo",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload.hex",
+        "topi": "topic",
+        "x": 1110,
+        "y": 200,
+        "wires": [
+            [
+                "ef61e541e8f9a933",
+                "a6e6720930858c11"
+            ]
+        ]
+    },
+    {
+        "id": "9c66711f2d16b804",
+        "type": "inject",
+        "z": "66149d75df766f35",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "originalAircraft",
+                "v": "{\"hex\":\"e4926f\",\"type\":\"adsb_icao\",\"flight\":\"GLO2113 \",\"r\":\"PR-GEK\",\"t\":\"B737\",\"desc\":\"BOEING 737-700\",\"alt_baro\":4275,\"alt_geom\":4700,\"gs\":149.4,\"track\":137.98,\"geom_rate\":-512,\"category\":\"A0\",\"lat\":-23.515304,\"lon\":-46.733449,\"nic\":8,\"rc\":186,\"seen_pos\":0.285,\"version\":0,\"nac_p\":8,\"nac_v\":0,\"sil\":2,\"sil_type\":\"invalid\",\"alert\":0,\"spi\":0,\"mlat\":[],\"tisb\":[],\"messages\":10531422,\"seen\":0.3,\"rssi\":-15.8,\"dst\":0.831,\"dir\":327}",
+                "vt": "json"
+            },
+            {
+                "p": "url",
+                "v": "\"https://api.adsbdb.com/v0/callsign/GLO2113\"",
+                "vt": "json"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"hex\":\"e4926f\",\"type\":\"adsb_icao\",\"flight\":\"GLO2113 \",\"r\":\"PR-GEK\",\"t\":\"B737\",\"desc\":\"BOEING 737-700\",\"alt_baro\":4275,\"alt_geom\":4700,\"gs\":149.4,\"track\":137.98,\"geom_rate\":-512,\"category\":\"A0\",\"lat\":-23.515304,\"lon\":-46.733449,\"nic\":8,\"rc\":186,\"seen_pos\":0.285,\"version\":0,\"nac_p\":8,\"nac_v\":0,\"sil\":2,\"sil_type\":\"invalid\",\"alert\":0,\"spi\":0,\"mlat\":[],\"tisb\":[],\"messages\":10531422,\"seen\":0.3,\"rssi\":-15.8,\"dst\":0.831,\"dir\":327}",
+        "payloadType": "json",
+        "x": 1130,
+        "y": 340,
+        "wires": [
+            [
+                "ef61e541e8f9a933"
+            ]
+        ]
+    },
+    {
+        "id": "5df6ef69a2dae91a",
+        "type": "debug",
+        "z": "66149d75df766f35",
+        "name": "debug 15",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1760,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "69f3060db7c9de05",
+        "type": "api-call-service",
+        "z": "66149d75df766f35",
+        "name": "Notificar Celular",
+        "server": "3b565a9e.76ccf6",
+        "version": 7,
+        "debugenabled": false,
+        "action": "notify.mobile_app_NOME_DO_DEVICE",
+        "floorId": [],
+        "areaId": [],
+        "deviceId": [],
+        "entityId": [],
+        "labelId": [],
+        "data": "{   \"title\": \"{{notification.title}}\",   \"message\": \"{{notification.message}}\" }",
+        "dataType": "json",
+        "mergeContext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "blockInputOverrides": true,
+        "domain": "notify",
+        "service": "mobile_app_NOME_DO_DEVICE",
+        "x": 2880,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b883b4c58472cf3e",
+        "type": "function",
+        "z": "66149d75df766f35",
+        "name": "Filtrar apenas aviões",
+        "func": "// Já vem como objeto\nconst data = msg.payload;\nconst aircrafts = Array.isArray(data.aircraft) ? data.aircraft : [];\n\nconst validCategories = ['A0', 'A1', 'A2', 'A3', 'A4', 'A5', 'A6'];\nconst filtered = aircrafts.filter(a => validCategories.includes(a.category));\n\n// Se não houver nenhum válido, não continua\nif (filtered.length === 0) {\n    return null;\n}\n\n// Passa adiante o primeiro válido\nmsg.payload = filtered[0];\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 200,
+        "wires": [
+            [
+                "f0a24d23610ed3f5"
+            ]
+        ]
+    },
+    {
+        "id": "a6e6720930858c11",
+        "type": "debug",
+        "z": "66149d75df766f35",
+        "name": "debug 20",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1380,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "276b1d2c598ce6d2",
+        "type": "http request",
+        "z": "66149d75df766f35",
+        "name": "Get ADSB Aircraft",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://opendata.adsb.fi/api/v2/lat/-23.526913/lon/-46.725241/dist/1.3",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 490,
+        "y": 200,
+        "wires": [
+            [
+                "b883b4c58472cf3e",
+                "c12359de5cd3b612"
+            ]
+        ]
+    },
+    {
+        "id": "386927f434bfa5e9",
+        "type": "inject",
+        "z": "66149d75df766f35",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 200,
+        "wires": [
+            [
+                "276b1d2c598ce6d2"
+            ]
+        ]
+    },
+    {
+        "id": "c12359de5cd3b612",
+        "type": "debug",
+        "z": "66149d75df766f35",
+        "name": "debug 19",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "3b565a9e.76ccf6",
+        "type": "server",
+        "name": "Home Assistant",
+        "version": 2,
+        "addon": true,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "y|yes|true|on|home|open",
+        "connectionDelay": true,
+        "cacheJson": true,
+        "heartbeat": false,
+        "heartbeatInterval": "30"
+    },
+    {
+        "id": "cf8ca1928186b2fe",
+        "type": "ha-entity-config",
+        "server": "3b565a9e.76ccf6",
+        "deviceConfig": "",
+        "name": "Último Voo",
+        "version": 6,
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "Último Voo"
+            },
+            {
+                "property": "icon",
+                "value": "mdi:airplane"
+            },
+            {
+                "property": "entity_picture",
+                "value": ""
+            },
+            {
+                "property": "entity_category",
+                "value": ""
+            },
+            {
+                "property": "device_class",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": ""
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            }
+        ],
+        "resend": false,
+        "debugEnabled": false
+    }
+]
